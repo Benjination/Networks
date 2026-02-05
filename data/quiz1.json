@@ -4,14 +4,15 @@
   "description": "Test your knowledge of Internet basics, network architecture, and core networking concepts",
   "category": "fundamentals",
   "difficulty": "beginner",
-  "estimatedTime": "30 minutes",
-  "totalQuestions": 14,
+  "estimatedTime": "60 minutes",
+  "totalQuestions": 24,
   "questions": [
     {
       "id": 1,
       "type": "short_answer",
       "question": "What is the Internet, and what role do protocols play in it?",
       "points": 5,
+      "hint": "<h4>Approach:</h4><div class='step'><span class='step-number'>1.</span>Define what the Internet is at a high level</div><div class='step'><span class='step-number'>2.</span>Describe its physical components (devices, links, switches)</div><div class='step'><span class='step-number'>3.</span>Explain what protocols are and their purpose</div><div class='step'><span class='step-number'>4.</span>Give examples of common protocols and their functions</div><ul><li><strong>Key concepts to cover:</strong> Network of networks, hosts/end systems, packet switches, communication rules</li><li><strong>Examples:</strong> HTTP, SMTP, TCP/IP, DNS</li></ul>",
       "answer": "The Internet is a global network of interconnected computer networks that enables communication and information sharing worldwide. It consists of billions of computing devices (hosts/end systems) connected through various types of links and packet switches (routers and link-layer switches). Protocols play a crucial role as they define the format, order of messages sent and received among network entities, and the actions taken on message transmission and receipt. They provide the rules and conventions that enable different devices and software to communicate effectively. Examples include HTTP for web browsing, SMTP for email, TCP/IP for reliable data transmission, etc."
     },
     {
@@ -54,6 +55,7 @@
       "type": "short_answer",
       "question": "What are the types of delays in a network?",
       "points": 5,
+      "hint": "<h4>Network Delay Components:</h4><div class='step'><span class='step-number'>1.</span>Think about what happens when a packet travels through a router</div><div class='step'><span class='step-number'>2.</span>Consider the sequence: Arrival → Processing → Queuing → Transmission → Propagation</div><div class='step'><span class='step-number'>3.</span>For each step, identify the time delay</div><ul><li><strong>Processing:</strong> Time to examine packet and decide where to send it</li><li><strong>Queueing:</strong> Time waiting in line for transmission</li><li><strong>Transmission:</strong> Time to push bits onto the wire (L/R)</li><li><strong>Propagation:</strong> Time for signal to travel the physical distance (d/s)</li></ul>",
       "answer": "Four main types of delays: 1. PROCESSING DELAY: Time to examine packet header, check for errors, and determine output link, 2. QUEUEING DELAY: Time spent waiting in output queue before transmission, 3. TRANSMISSION DELAY: Time to push all packet bits onto the link (L/R), 4. PROPAGATION DELAY: Time for signal to travel from source to destination (d/s). Total nodal delay = Processing + Queueing + Transmission + Propagation"
     },
     {
@@ -128,6 +130,272 @@
       "question": "Write distinction between routing versus forwarding.",
       "points": 5,
       "answer": "ROUTING: Network-wide process that determines end-to-end paths, Creates and maintains routing tables/forwarding tables, Uses routing algorithms (e.g., OSPF, BGP), Operates on longer timescales, Control plane function. FORWARDING: Local action at each router, Moves packets from input link to appropriate output link, Uses forwarding table created by routing process, Operates on packet timescales (nanoseconds), Data plane function"
+    },
+    {
+      "id": 15,
+      "type": "calculation",
+      "question": "Consider the circuit-switched network shown in the figure below, with four circuit switches A, B, C, and D. Suppose there are 20 circuits between A and B, 19 circuits between B and C, 15 circuits between C and D, and 16 circuits between D and A. What is the maximum number of connections that can be ongoing in the network at any one time?",
+      "image": "q15.png",
+      "points": 4,
+      "hint": "<h4>Circuit Switching Approach:</h4><div class='step'><span class='step-number'>1.</span>Understand that in circuit switching, each connection needs a dedicated circuit</div><div class='step'><span class='step-number'>2.</span>Each link can handle multiple simultaneous connections up to its circuit capacity</div><div class='step'><span class='step-number'>3.</span>The maximum connections = sum of all link capacities</div><div class='formula'>Total connections = Circuits(A-B) + Circuits(B-C) + Circuits(C-D) + Circuits(D-A)</div><ul><li><strong>Key insight:</strong> Unlike packet switching, circuit switching reserves dedicated paths</li><li><strong>Each circuit can carry one connection simultaneously</strong></li></ul>",
+      "answer": "70 connections (sum of all links: 20 + 19 + 15 + 16 = 70)"
+    },
+    {
+      "id": 16,
+      "type": "multi_part",
+      "question": "Consider a scenario in which 5 users are being multiplexed over a 10 Mbps channel. Under the following scenarios, determine whether circuit switching, packet switching, or neither is better suited for the situation.",
+      "hint": "<h4>Circuit vs Packet Switching Analysis:</h4><div class='step'><span class='step-number'>1.</span>For Circuit Switching: Check if total demand ≤ channel capacity</div><div class='formula'>Total demand = Number of users × Rate per user</div><div class='step'><span class='step-number'>2.</span>For Packet Switching: Check if peak rate fits and average utilization is reasonable</div><div class='step'><span class='step-number'>3.</span>Compare: Constant rate → Circuit; Bursty traffic → Packet</div><ul><li><strong>Circuit switching:</strong> Dedicated bandwidth, works if total ≤ capacity</li><li><strong>Packet switching:</strong> Statistical multiplexing, handles bursts better</li><li><strong>Neither:</strong> When requirements exceed capacity fundamentally</li></ul>",
+      "parts": [
+        {
+          "part": "A",
+          "question": "Each user generates traffic at an average rate of 2.1 Mbps, generating traffic at a rate of 15 Mbps when transmitting",
+          "answer": "Neither - Total demand (5 × 2.1 = 10.5 Mbps) exceeds capacity for circuit switching, and peak rate (15 Mbps) exceeds capacity for packet switching"
+        },
+        {
+          "part": "B", 
+          "question": "Each user generates traffic at an average rate of 2 Mbps, and always transmits at a rate of 2 Mbps when active",
+          "answer": "Circuit switching - Total demand (5 × 2 = 10 Mbps) exactly equals capacity, and constant rate suits circuit switching"
+        },
+        {
+          "part": "C",
+          "question": "Each user generates traffic at an average rate of 0.21 Mbps, generating traffic at a rate of 15 Mbps when transmitting",
+          "answer": "Packet switching - Low average rate (5 × 0.21 = 1.05 Mbps total) allows statistical multiplexing to handle bursty 15 Mbps peaks"
+        }
+      ],
+      "points": 6
+    },
+    {
+      "id": 17,
+      "type": "matching",
+      "question": "Match each network delay description with its correct type of delay:",
+      "options": ["Transmission delay", "Processing delay", "Queueing delay", "Propagation delay"],
+      "items": [
+        {
+          "id": 1,
+          "description": "Time needed to perform an integrity check, look up packet information in a local table, and move the packet from an input link to an output link in a router.",
+          "answer": "Processing delay"
+        },
+        {
+          "id": 2,
+          "description": "Time spent waiting in packet buffers for link transmission due to congestion or scheduling.",
+          "answer": "Queueing delay"
+        },
+        {
+          "id": 3,
+          "description": "Time spent transmitting the packet's bits into the link (i.e., from sender's buffer onto the wire).",
+          "answer": "Transmission delay"
+        },
+        {
+          "id": 4,
+          "description": "Time needed for bits to physically propagate through the transmission medium from one end of a link to the other.",
+          "answer": "Propagation delay"
+        }
+      ],
+      "points": 4
+    },
+    {
+      "id": 18,
+      "type": "calculation",
+      "question": "Consider the scenario shown below, with four different servers connected to four different clients over four three-hop paths. The four pairs share a common middle hop with a transmission capacity of R = 300 Mbps. The four links from the servers to the shared link have a transmission capacity of RS = 50 Mbps. Each of the four links from the shared middle link to a client has a transmission capacity of RC = 90 Mbps. What is the maximum achievable end-end throughput (an integer value, in Mbps) for each of four client-to-server pairs, assuming that the middle link is fairly shared (divides its transmission rate equally) and all servers are trying to send at their maximum rate?",
+      "image": "q18.png",
+      "points": 4,
+      "hint": "<h4>Throughput Analysis Approach:</h4><div class='step'><span class='step-number'>1.</span>Identify all link capacities in the path: Server→Middle→Client</div><div class='step'><span class='step-number'>2.</span>Calculate middle link capacity per flow: Total middle capacity ÷ Number of flows</div><div class='step'><span class='step-number'>3.</span>Find the bottleneck: minimum capacity among all hops</div><div class='formula'>Bottleneck = min(Server_capacity, Middle_per_flow, Client_capacity)</div><div class='step'><span class='step-number'>4.</span>The bottleneck determines maximum throughput</div><ul><li><strong>Server links:</strong> RS = 50 Mbps each</li><li><strong>Middle link per flow:</strong> R/4 = 300/4 = 75 Mbps</li><li><strong>Client links:</strong> RC = 90 Mbps each</li></ul>",
+      "answer": "50 Mbps - The bottleneck is the server links at 50 Mbps each. Middle link capacity (300/4 = 75 Mbps per flow) and client links (90 Mbps) are higher."
+    },
+    {
+      "id": 19,
+      "type": "matching",
+      "question": "Match each Internet layer with the correct unit of data that is exchanged among protocol entities at that layer.",
+      "options": ["Message", "Bit", "Segment", "Datagram", "Frame"],
+      "items": [
+        {
+          "id": 1,
+          "description": "Application layer",
+          "answer": "Message"
+        },
+        {
+          "id": 2,
+          "description": "Transport layer",
+          "answer": "Segment"
+        },
+        {
+          "id": 3,
+          "description": "Network layer",
+          "answer": "Datagram"
+        },
+        {
+          "id": 4,
+          "description": "Link layer",
+          "answer": "Frame"
+        },
+        {
+          "id": 5,
+          "description": "Physical layer",
+          "answer": "Bit"
+        }
+      ],
+      "points": 5
+    },
+    {
+      "id": 20,
+      "type": "multi_part",
+      "question": "Consider the circuit-switched network shown in the figure below, with circuit switches A, B, C, and D. Suppose there are 13 circuits between A and B, 19 circuits between B and C, 15 circuits between C and D, and 17 circuits between D and A.",
+      "image": "qQ1.png",
+      "parts": [
+        {
+          "part": "1.1",
+          "question": "What is the maximum number of connections that can be ongoing in the network at any one time?",
+          "answer": "64 (sum of all circuits: 13 + 19 + 15 + 17 = 64)"
+        },
+        {
+          "part": "1.2",
+          "question": "Suppose that these maximum number of connections are all ongoing. What happens when another call connection request arrives to the network, will it be accepted? Answer Yes or No",
+          "answer": "No - All circuits are already in use"
+        },
+        {
+          "part": "1.3",
+          "question": "Suppose that every connection requires 2 consecutive hops, and calls are connected clockwise. For example, a connection can go from A to C, from B to D, from C to A, and from D to B. With these constraints, what is the maximum number of connections that can be ongoing in the network at any one time?",
+          "answer": "28 (A to C: min(13,19) = 13 connections, B to D: min(19,15) = 15 connections. Total: 13 + 15 = 28)"
+        },
+        {
+          "part": "1.4",
+          "question": "Suppose that 11 connections are needed from A to C, and 13 connections are needed from B to D. Can we route these calls through the four links to accommodate all 24 connections? Answer Yes or No",
+          "answer": "Yes - A to C needs 11 ≤ 13 (A-B capacity), B to D needs 13 ≤ 15 (C-D capacity). Both can be accommodated."
+        }
+      ],
+      "points": 8
+    },
+    {
+      "id": 21,
+      "type": "multi_part",
+      "question": "Consider the two scenarios below: A circuit-switching scenario in which Ncs users, each requiring a bandwidth of 20 Mbps, must share a link of capacity 100 Mbps. A packet-switching scenario with Nps users sharing a 100 Mbps link, where each user again requires 20 Mbps when transmitting, but only needs to transmit 20 percent of the time.",
+      "parts": [
+        {
+          "part": "2.1",
+          "question": "When circuit switching is used, what is the maximum number of users that can be supported?",
+          "answer": "5 users (100 Mbps ÷ 20 Mbps per user = 5)"
+        },
+        {
+          "part": "2.2",
+          "question": "Suppose packet switching is used. If there are 9 packet-switching users, can this many users be supported under circuit-switching? Yes or No.",
+          "answer": "No - 9 users would need 9 × 20 = 180 Mbps, which exceeds the 100 Mbps capacity"
+        },
+        {
+          "part": "2.3",
+          "question": "Suppose packet switching is used. What is the probability that a given (specific) user is transmitting, and the remaining users are not transmitting?",
+          "answer": "0.034 - P(one transmitting) × P(8 not transmitting) = 0.20 × (0.80)^8 ≈ 0.034"
+        },
+        {
+          "part": "2.5",
+          "question": "When one user is transmitting, what fraction of the link capacity will be used by this user? Write your answer as a decimal.",
+          "answer": "0.20 - 20 Mbps ÷ 100 Mbps = 0.20"
+        }
+      ],
+      "points": 8
+    },
+    {
+      "id": 20,
+      "type": "multi_part", 
+      "question": "Consider the store-and-forward transmission analogy with cars in a caravan being serviced at a toll booth. Suppose the caravan has 20 cars, and that the tollbooth services (transmits) a car at a rate of one car per 2 seconds. Once receiving service, a car proceeds to the next tollbooth, which is 200 kilometers away at a rate of 10 kilometers per second. The entire caravan must be stored at the tollbooth before the first car can begin driving towards the next tollbooth.",
+      "image": "qQ3.png",
+      "parts": [
+        {
+          "part": "3.1",
+          "question": "Once a car enters service at the tollbooth, how long does it take until it leaves service?",
+          "answer": "2 seconds - Given service rate is one car per 2 seconds"
+        },
+        {
+          "part": "3.2",
+          "question": "How long does it take for the entire caravan to receive service at the tollbooth (time from when the first car enters service until the last car leaves the tollbooth)?",
+          "answer": "40 seconds - 20 cars × 2 seconds/car = 40 seconds"
+        },
+        {
+          "part": "3.3",
+          "question": "Once the first car leaves the tollbooth, how long does it take until it arrives at the next tollbooth?",
+          "answer": "20 seconds - 200 km ÷ 10 km/s = 20 seconds"
+        },
+        {
+          "part": "3.4",
+          "question": "Once the last car leaves the tollbooth, how long does it take until it arrives at the next tollbooth?",
+          "answer": "20 seconds - Same propagation delay applies to all cars"
+        },
+        {
+          "part": "3.5",
+          "question": "Are there ever two cars in service at the same time, one at the first toll booth and one at the second toll booth? Answer Yes or No",
+          "answer": "No - Store-and-forward requires entire caravan to finish at first booth before starting at second"
+        },
+        {
+          "part": "3.6",
+          "question": "Are there ever zero cars in service at the same time, i.e., the caravan has finished at the first tollbooth but not yet arrived at the second tollbooth? Answer Yes or No",
+          "answer": "Yes - During the 20-second propagation delay between tollbooths"
+        }
+      ],
+      "points": 12
+    },
+    {
+      "id": 23,
+      "type": "multi_part", 
+      "question": "Consider a single router transmitting packets, each of length L bits, over a single link with transmission rate R Mbps. Suppose that the packet length is L = 8000 bits, and that the link transmission rate is R = 1 Mbps.",
+      "parts": [
+        {
+          "part": "4.1",
+          "question": "What is the transmission delay?",
+          "answer": "0.008 seconds - L/R = 8000 bits ÷ 1×10^6 bps = 0.008 seconds (8 milliseconds)"
+        },
+        {
+          "part": "4.2", 
+          "question": "What is the maximum number of packets per second that can be transmitted by this link?",
+          "answer": "125 packets/sec - R/L = 1×10^6 bps ÷ 8000 bits/packet = 125 packets/sec"
+        }
+      ],
+      "hint": "<h4>Transmission Delay Calculations:</h4><div class='step'><span class='step-number'>1.</span>For transmission delay: Use the formula</div><div class='formula'>Transmission Delay = L/R (packet length / transmission rate)</div><div class='step'><span class='step-number'>2.</span>For maximum packets per second: Think about how many packets fit in one second</div><div class='formula'>Max packets/sec = R/L (transmission rate / packet length)</div><ul><li><strong>Units matter:</strong> Convert Mbps to bps (multiply by 10^6)</li><li><strong>L = 8000 bits, R = 1 Mbps = 1×10^6 bps</strong></li></ul>",
+      "points": 4
+    },
+    {
+      "id": 22,
+      "type": "multi_part",
+      "question": "Consider the queuing delay in a router buffer, where the packet experiences a delay as it waits to be transmitted onto the link. Assume a constant transmission rate of R = 800000 bps, a constant packet-length L = 3900 bits, and a is the average rate of packets/second. Traffic intensity I = La/R, and the queuing delay is calculated as I(L/R)(1 - I) for I < 1.",
+      "image": "qQ5.png",
+      "parts": [
+        {
+          "part": "5.1",
+          "question": "In practice, does the queuing delay tend to vary a lot? Answer with Yes or No",
+          "answer": "Yes - Because network traffic is often bursty and unpredictable, causing fluctuations in the number of packets waiting in the queue."
+        },
+        {
+          "part": "5.2",
+          "question": "If the buffer has a maximum size of 899 packets, how many of the 800 packets would be dropped upon arrival?",
+          "answer": "0 - The buffer has a maximum capacity of 899 packets, and only 800 packets are arriving. Since the number of arriving packets is less than the buffer's maximum size, all of them can be accommodated without any being dropped."
+        }
+      ],
+      "points": 6
+    },
+    {
+      "id": 23,
+      "type": "multi_part",
+      "question": "Computing end-end delay (transmission and propagation delay). Consider the figure below, with three links, each with the specified transmission rate and link length.",
+      "image": "qQ6.png",
+      "parts": [
+        {
+          "part": "6.1",
+          "question": "Assume the length of a packet is 16000 bits. The speed of light propagation delay on each link is 3x10^8 m/sec. Round your answer to two decimals after leading zeros.",
+          "answer": "0.0016 seconds"
+        },
+        {
+          "part": "6.2",
+          "question": "What is the propagation delay of link 1?",
+          "answer": "0.00001 seconds"
+        }
+      ],
+      "points": 4
+    },
+    {
+      "id": 24,
+      "type": "calculation",
+      "question": "Consider the scenario shown below, with four different servers connected to four different clients over four three-hop paths. The four pairs share a common middle hop with a transmission capacity of R = 200 Mbps. The four links from the servers to the shared link have a transmission capacity of RS = 70 Mbps. Each of the four links from the shared middle link to a client has a transmission capacity of RC = 20 Mbps. What is the maximum achievable end-end throughput (in Mbps) for each of four client-to-server pairs, assuming that the middle link is fairly shared (divides its transmission rate equally)?",
+      "image": "qQ7.png",
+      "points": 4,
+      "answer": "20 Mbps - The bottleneck is the client links at 20 Mbps each. The middle link capacity (200/4 = 50 Mbps per flow) and server links (70 Mbps) are higher."
     }
   ]
 }

@@ -31,6 +31,15 @@
                     <h2 class="question-text" id="questionText"></h2>
                     <div class="question-type-indicator" id="questionType"></div>
                     
+                    <div class="hint-section">
+                        <button class="btn btn-hint" id="hintBtn" onclick="toggleHint()" style="display: none;">
+                            💡 How Do I Solve This?
+                        </button>
+                        <div class="hint-content" id="hintContent" style="display: none;">
+                            <!-- Hint content will be populated dynamically -->
+                        </div>
+                    </div>
+                    
                     <div class="answer-section" id="answerSection">
                         <!-- Answer inputs will be dynamically generated -->
                     </div>

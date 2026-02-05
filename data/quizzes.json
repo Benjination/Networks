@@ -3,14 +3,14 @@
     {
       "id": "quiz1",
       "title": "Quiz 1: Internet and Network Fundamentals",
-      "description": "Test your knowledge of Internet basics, network architecture, and core networking concepts",
+      "description": "Test your knowledge of Internet basics, network architecture, and core networking concepts including circuit switching, packet switching, delays, throughput, and network layers",
       "category": "fundamentals",
       "difficulty": "beginner",
-      "estimatedTime": "30 minutes",
-      "totalQuestions": 14,
+      "estimatedTime": "75 minutes",
+      "totalQuestions": 24,
       "isActive": true,
       "createdDate": "2026-02-05",
-      "tags": ["internet", "protocols", "networking-basics", "architecture"]
+      "tags": ["internet", "protocols", "networking-basics", "architecture", "circuit-switching", "packet-switching"]
     }
   ],
   "categories": [

@@ -56,11 +56,37 @@ function renderCurrentQuestion() {
     const question = currentQuiz.questions[currentQuestionIndex];
     
     document.getElementById('questionNumber').textContent = `Question ${question.id}`;
-    document.getElementById('questionText').textContent = question.question;
     document.getElementById('questionType').textContent = getQuestionTypeLabel(question.type);
+    
+    // Handle question text and image together
+    const questionTextContainer = document.getElementById('questionText');
+    let questionHtml = question.question;
+    
+    // Add image if present
+    if (question.image) {
+        questionHtml += `<div class="question-image" style="margin: 15px 0;">
+            <img src="figures/${question.image}" alt="Question ${question.id} diagram" 
+                 style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px;">
+        </div>`;
+    }
+    
+    questionTextContainer.innerHTML = questionHtml;
     
     const answerSection = document.getElementById('answerSection');
     answerSection.innerHTML = renderAnswerInput(question);
+    
+    // Handle hint button and content
+    const hintBtn = document.getElementById('hintBtn');
+    const hintContent = document.getElementById('hintContent');
+    
+    if (question.hint) {
+        hintBtn.style.display = 'block';
+        hintContent.innerHTML = question.hint;
+        hintContent.style.display = 'none'; // Reset to hidden
+        hintBtn.textContent = '💡 How Do I Solve This?';
+    } else {
+        hintBtn.style.display = 'none';
+    }
     
     // Update navigation buttons
     const prevBtn = document.getElementById('prevBtn');
@@ -73,12 +99,29 @@ function renderCurrentQuestion() {
     restoreAnswer(question);
 }
 
+// Toggle hint display
+function toggleHint() {
+    const hintContent = document.getElementById('hintContent');
+    const hintBtn = document.getElementById('hintBtn');
+    
+    if (hintContent.style.display === 'none') {
+        hintContent.style.display = 'block';
+        hintBtn.textContent = '❌ Hide Solution Approach';
+    } else {
+        hintContent.style.display = 'none';
+        hintBtn.textContent = '💡 How Do I Solve This?';
+    }
+}
+
 // Get question type label
 function getQuestionTypeLabel(type) {
     const labels = {
         'short_answer': 'Short Answer',
         'multiple_choice': 'Multiple Choice (Multiple Select)',
-        'single_choice': 'Single Choice'
+        'single_choice': 'Single Choice',
+        'calculation': 'Calculation',
+        'multi_part': 'Multi-Part Question',
+        'matching': 'Matching'
     };
     return labels[type] || 'Unknown';
 }
@@ -87,6 +130,7 @@ function getQuestionTypeLabel(type) {
 function renderAnswerInput(question) {
     switch (question.type) {
         case 'short_answer':
+        case 'calculation':
             return `
                 <textarea 
                     class="answer-textarea" 
@@ -130,6 +174,40 @@ function renderAnswerInput(question) {
                 `;
             }).join('');
             
+        case 'multi_part':
+            return question.parts.map(part => {
+                return `
+                    <div class="question-part">
+                        <h4>Part ${part.part}</h4>
+                        <p>${part.question}</p>
+                        <textarea 
+                            class="answer-textarea" 
+                            id="answer-${question.id}-${part.part}"
+                            placeholder="Type your answer here..."
+                            onchange="saveMultiPartAnswer(${question.id}, '${part.part}', this.value)"
+                        ></textarea>
+                    </div>
+                `;
+            }).join('');
+            
+        case 'matching':
+            return `
+                <div class="matching-section">
+                    <div class="matching-instructions">Match each description with the correct option:</div>
+                    ${question.items.map(item => `
+                        <div class="matching-item">
+                            <p><strong>${item.id}.</strong> ${item.description}</p>
+                            <select id="match-${question.id}-${item.id}" onchange="saveMatchingAnswer(${question.id}, ${item.id}, this.value)">
+                                <option value="">Select an answer...</option>
+                                ${question.options.map(option => 
+                                    `<option value="${option}">${option}</option>`
+                                ).join('')}
+                            </select>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            
         default:
             return '<p>Unknown question type</p>';
     }
@@ -149,6 +227,24 @@ function saveMultipleChoice(questionId) {
     updateNavigationStatus();
 }
 
+// Save answer for multi-part questions
+function saveMultiPartAnswer(questionId, partId, value) {
+    if (!userAnswers[questionId]) {
+        userAnswers[questionId] = {};
+    }
+    userAnswers[questionId][partId] = value;
+    updateNavigationStatus();
+}
+
+// Save answer for matching questions
+function saveMatchingAnswer(questionId, itemId, value) {
+    if (!userAnswers[questionId]) {
+        userAnswers[questionId] = {};
+    }
+    userAnswers[questionId][itemId] = value;
+    updateNavigationStatus();
+}
+
 // Restore previous answer
 function restoreAnswer(question) {
     const savedAnswer = userAnswers[question.id];
@@ -156,6 +252,7 @@ function restoreAnswer(question) {
     
     switch (question.type) {
         case 'short_answer':
+        case 'calculation':
             const textarea = document.getElementById(`answer-${question.id}`);
             if (textarea) textarea.value = savedAnswer;
             break;
@@ -170,6 +267,24 @@ function restoreAnswer(question) {
                 savedAnswer.forEach(value => {
                     const checkbox = document.querySelector(`input[name="question-${question.id}"][value="${value}"]`);
                     if (checkbox) checkbox.checked = true;
+                });
+            }
+            break;
+            
+        case 'multi_part':
+            if (typeof savedAnswer === 'object') {
+                Object.keys(savedAnswer).forEach(partId => {
+                    const textarea = document.getElementById(`answer-${question.id}-${partId}`);
+                    if (textarea) textarea.value = savedAnswer[partId];
+                });
+            }
+            break;
+            
+        case 'matching':
+            if (typeof savedAnswer === 'object') {
+                Object.keys(savedAnswer).forEach(itemId => {
+                    const select = document.getElementById(`match-${question.id}-${itemId}`);
+                    if (select) select.value = savedAnswer[itemId];
                 });
             }
             break;
