@@ -81,21 +81,26 @@ function renderCurrentQuestion() {
     const checkBtn = document.getElementById('checkAnswerBtn');
     const feedbackDiv = document.getElementById('answerFeedback');
     
+    // Always reset hint state first
+    hintContent.style.display = 'none';
+    hintBtn.textContent = '💡 How Do I Solve This?';
+    
     if (question.hint) {
         hintBtn.style.display = 'block';
         hintContent.innerHTML = question.hint;
-        hintContent.style.display = 'none'; // Reset to hidden
-        hintBtn.textContent = '💡 How Do I Solve This?';
     } else {
         hintBtn.style.display = 'none';
+        hintContent.innerHTML = '';
     }
     
     // Show check answer button for gradeable questions
     if (canGradeQuestion(question)) {
         checkBtn.style.display = 'block';
         feedbackDiv.style.display = 'none'; // Reset feedback
+        feedbackDiv.innerHTML = ''; // Clear previous feedback
     } else {
         checkBtn.style.display = 'none';
+        feedbackDiv.style.display = 'none';
     }
     
     // Update navigation buttons
