@@ -462,6 +462,58 @@ body {
     border-color: #667eea;
 }
 
+/* Answer feedback styling */
+.answer-feedback-section {
+    margin: 1.5rem 0;
+}
+
+.btn-check {
+    background: #4299e1;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.btn-check:hover {
+    background: #3182ce;
+}
+
+.answer-feedback {
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    font-weight: 500;
+}
+
+.feedback-correct {
+    background: #f0fff4;
+    color: #38a169;
+    border-left: 4px solid #38a169;
+}
+
+.feedback-incorrect {
+    background: #fed7d7;
+    color: #e53e3e;
+    border-left: 4px solid #e53e3e;
+}
+
+.feedback-partial {
+    background: #fefcbf;
+    color: #d69e2e;
+    border-left: 4px solid #d69e2e;
+}
+
+.feedback-explanation {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    font-weight: normal;
+    opacity: 0.9;
+}
+
+.feedback-score {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
 /* Hint section styling */
 .hint-section {
     margin: 1.5rem 0;

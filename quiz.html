@@ -44,6 +44,15 @@
                         <!-- Answer inputs will be dynamically generated -->
                     </div>
                     
+                    <div class="answer-feedback-section">
+                        <button class="btn btn-check" id="checkAnswerBtn" onclick="checkCurrentAnswer()" style="display: none;">
+                            ✓ Check My Answer
+                        </button>
+                        <div class="answer-feedback" id="answerFeedback" style="display: none;">
+                            <!-- Feedback will be populated dynamically -->
+                        </div>
+                    </div>
+                    
                     <div class="question-actions">
                         <button class="btn btn-secondary" id="prevBtn" onclick="previousQuestion()">Previous</button>
                         <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">Next</button>

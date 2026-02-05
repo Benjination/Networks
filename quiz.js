@@ -78,6 +78,8 @@ function renderCurrentQuestion() {
     // Handle hint button and content
     const hintBtn = document.getElementById('hintBtn');
     const hintContent = document.getElementById('hintContent');
+    const checkBtn = document.getElementById('checkAnswerBtn');
+    const feedbackDiv = document.getElementById('answerFeedback');
     
     if (question.hint) {
         hintBtn.style.display = 'block';
@@ -86,6 +88,14 @@ function renderCurrentQuestion() {
         hintBtn.textContent = '💡 How Do I Solve This?';
     } else {
         hintBtn.style.display = 'none';
+    }
+    
+    // Show check answer button for gradeable questions
+    if (canGradeQuestion(question)) {
+        checkBtn.style.display = 'block';
+        feedbackDiv.style.display = 'none'; // Reset feedback
+    } else {
+        checkBtn.style.display = 'none';
     }
     
     // Update navigation buttons
@@ -111,6 +121,246 @@ function toggleHint() {
         hintContent.style.display = 'none';
         hintBtn.textContent = '💡 How Do I Solve This?';
     }
+}
+
+// Check if a question can be auto-graded
+function canGradeQuestion(question) {
+    const gradeable = ['multiple_choice', 'single_choice', 'matching', 'calculation', 'short_answer'];
+    return gradeable.includes(question.type) && (question.correctAnswer || question.correctAnswers || question.keywords || question.answer);
+}
+
+// Check the current question's answer
+function checkCurrentAnswer() {
+    const question = currentQuiz.questions[currentQuestionIndex];
+    const userAnswer = userAnswers[question.id];
+    
+    if (!userAnswer || (Array.isArray(userAnswer) && userAnswer.length === 0)) {
+        showFeedback('Please provide an answer first.', 'incorrect');
+        return;
+    }
+    
+    const result = gradeAnswer(question, userAnswer);
+    showFeedback(result.message, result.type, result.score);
+}
+
+// Grade an answer based on question type
+function gradeAnswer(question, userAnswer) {
+    switch (question.type) {
+        case 'single_choice':
+            return gradeSingleChoice(question, userAnswer);
+        case 'multiple_choice':
+            return gradeMultipleChoice(question, userAnswer);
+        case 'matching':
+            return gradeMatching(question, userAnswer);
+        case 'calculation':
+            return gradeCalculation(question, userAnswer);
+        case 'short_answer':
+            return gradeShortAnswer(question, userAnswer);
+        case 'multi_part':
+            return gradeMultiPart(question, userAnswer);
+        default:
+            return { type: 'partial', message: 'Answer recorded. Manual review required.', score: 0 };
+    }
+}
+
+// Grade single choice questions
+function gradeSingleChoice(question, userAnswer) {
+    if (userAnswer === question.correctAnswer) {
+        return { type: 'correct', message: '✓ Correct!', score: question.points };
+    } else {
+        return { 
+            type: 'incorrect', 
+            message: `✗ Incorrect. The correct answer is ${question.correctAnswer}.`,
+            score: 0 
+        };
+    }
+}
+
+// Grade multiple choice questions
+function gradeMultipleChoice(question, userAnswer) {
+    const correct = question.correctAnswers.sort();
+    const user = Array.isArray(userAnswer) ? userAnswer.sort() : [userAnswer];
+    
+    if (JSON.stringify(correct) === JSON.stringify(user)) {
+        return { type: 'correct', message: '✓ Correct! You selected all the right answers.', score: question.points };
+    } else {
+        const correctCount = user.filter(ans => correct.includes(ans)).length;
+        const partialScore = Math.floor((correctCount / correct.length) * question.points);
+        
+        if (partialScore > 0) {
+            return { 
+                type: 'partial', 
+                message: `⚡ Partially correct (${correctCount}/${correct.length} right). Correct answers: ${correct.join(', ')}`,
+                score: partialScore
+            };
+        } else {
+            return { 
+                type: 'incorrect', 
+                message: `✗ Incorrect. Correct answers: ${correct.join(', ')}`,
+                score: 0 
+            };
+        }
+    }
+}
+
+// Grade calculation questions
+function gradeCalculation(question, userAnswer) {
+    const answer = userAnswer.toString().toLowerCase().trim();
+    const correctAnswers = Array.isArray(question.expectedAnswers) ? 
+        question.expectedAnswers : [question.answer];
+    
+    // Check for exact matches (handling different formats)
+    for (let correctAns of correctAnswers) {
+        const correct = correctAns.toString().toLowerCase().trim();
+        if (answer === correct || answer.includes(correct.split(' ')[0])) {
+            return { type: 'correct', message: '✓ Correct!', score: question.points };
+        }
+    }
+    
+    // Check for numerical values
+    const userNum = parseFloat(answer.replace(/[^\d.]/g, ''));
+    const correctNum = parseFloat(correctAnswers[0].toString().replace(/[^\d.]/g, ''));
+    
+    if (!isNaN(userNum) && !isNaN(correctNum)) {
+        const tolerance = correctNum * 0.05; // 5% tolerance
+        if (Math.abs(userNum - correctNum) <= tolerance) {
+            return { type: 'correct', message: '✓ Correct!', score: question.points };
+        }
+    }
+    
+    return { 
+        type: 'incorrect', 
+        message: `✗ Incorrect. Expected: ${correctAnswers[0]}`,
+        score: 0 
+    };
+}
+
+// Grade short answer questions using keywords
+function gradeShortAnswer(question, userAnswer) {
+    if (!question.keywords) {
+        return { type: 'partial', message: 'Answer recorded. Manual review required.', score: 0 };
+    }
+    
+    const answer = userAnswer.toLowerCase();
+    const required = question.keywords.required || [];
+    const bonus = question.keywords.bonus || [];
+    
+    let score = 0;
+    let matched = 0;
+    let feedback = [];
+    
+    // Check required keywords
+    for (let keyword of required) {
+        if (answer.includes(keyword.toLowerCase())) {
+            matched++;
+            score += 1;
+        } else {
+            feedback.push(`Missing: ${keyword}`);
+        }
+    }
+    
+    // Check bonus keywords
+    for (let keyword of bonus) {
+        if (answer.includes(keyword.toLowerCase())) {
+            score += 0.5;
+            feedback.push(`Good: mentioned ${keyword}`);
+        }
+    }
+    
+    const percentage = matched / required.length;
+    const finalScore = Math.min(Math.floor((score / (required.length + bonus.length * 0.5)) * question.points), question.points);
+    
+    if (percentage >= 0.8) {
+        return { 
+            type: 'correct', 
+            message: `✓ Excellent! ${feedback.length > 0 ? feedback.join('. ') : ''}`,
+            score: finalScore
+        };
+    } else if (percentage >= 0.5) {
+        return { 
+            type: 'partial', 
+            message: `⚡ Good effort! ${feedback.length > 0 ? feedback.join('. ') : ''}`,
+            score: finalScore
+        };
+    } else {
+        return { 
+            type: 'incorrect', 
+            message: `✗ Needs improvement. ${feedback.length > 0 ? feedback.join('. ') : ''}`,
+            score: 0
+        };
+    }
+}
+
+// Grade multi-part questions
+function gradeMultiPart(question, userAnswer) {
+    if (!question.expectedAnswers || typeof userAnswer !== 'object') {
+        return { type: 'partial', message: 'Answer recorded. Manual review required.', score: 0 };
+    }
+    
+    let totalScore = 0;
+    let maxScore = question.points;
+    let feedback = [];
+    let correctParts = 0;
+    
+    for (let partId in userAnswer) {
+        if (question.expectedAnswers[partId] && userAnswer[partId]) {
+            const partAnswer = userAnswer[partId].toLowerCase().trim();
+            const expectedAnswers = question.expectedAnswers[partId];
+            
+            let partCorrect = false;
+            for (let expected of expectedAnswers) {
+                if (partAnswer === expected.toLowerCase() || partAnswer.includes(expected.toLowerCase().split(' ')[0])) {
+                    partCorrect = true;
+                    break;
+                }
+            }
+            
+            if (partCorrect) {
+                correctParts++;
+                feedback.push(`Part ${partId}: ✓`);
+            } else {
+                feedback.push(`Part ${partId}: ✗ Expected: ${expectedAnswers[0]}`);
+            }
+        }
+    }
+    
+    const totalParts = Object.keys(question.expectedAnswers).length;
+    const scorePercentage = correctParts / totalParts;
+    totalScore = Math.floor(scorePercentage * maxScore);
+    
+    if (scorePercentage === 1) {
+        return { 
+            type: 'correct', 
+            message: `✓ Perfect! All parts correct. ${feedback.join(', ')}`,
+            score: totalScore
+        };
+    } else if (scorePercentage >= 0.5) {
+        return { 
+            type: 'partial', 
+            message: `⚡ Good work! ${correctParts}/${totalParts} parts correct. ${feedback.join(', ')}`,
+            score: totalScore
+        };
+    } else {
+        return { 
+            type: 'incorrect', 
+            message: `✗ Needs work. ${correctParts}/${totalParts} parts correct. ${feedback.join(', ')}`,
+            score: 0
+        };
+    }
+}
+
+// Show feedback to user
+function showFeedback(message, type, score = null) {
+    const feedbackDiv = document.getElementById('answerFeedback');
+    feedbackDiv.className = `answer-feedback feedback-${type}`;
+    
+    let content = `<div class="feedback-message">${message}</div>`;
+    if (score !== null) {
+        content = `<div class="feedback-score">Score: ${score}/${currentQuiz.questions[currentQuestionIndex].points}</div>` + content;
+    }
+    
+    feedbackDiv.innerHTML = content;
+    feedbackDiv.style.display = 'block';
 }
 
 // Get question type label
@@ -243,6 +493,52 @@ function saveMatchingAnswer(questionId, itemId, value) {
     }
     userAnswers[questionId][itemId] = value;
     updateNavigationStatus();
+}
+
+// Grade matching questions
+function gradeMatching(question, userAnswer) {
+    if (!question.items || typeof userAnswer !== 'object') {
+        return { type: 'partial', message: 'Answer recorded. Manual review required.', score: 0 };
+    }
+    
+    let correctCount = 0;
+    let totalItems = question.items.length;
+    let feedback = [];
+    
+    question.items.forEach(item => {
+        const userChoice = userAnswer[item.id];
+        const correctChoice = item.correctAnswer || item.answer;
+        
+        if (userChoice && userChoice === correctChoice) {
+            correctCount++;
+            feedback.push(`${item.id}: ✓`);
+        } else {
+            feedback.push(`${item.id}: ✗ Expected ${correctChoice}`);
+        }
+    });
+    
+    const percentage = correctCount / totalItems;
+    const score = Math.floor(percentage * question.points);
+    
+    if (percentage === 1) {
+        return { 
+            type: 'correct', 
+            message: `✓ Perfect matching! All ${correctCount} items correct.`,
+            score: question.points
+        };
+    } else if (percentage >= 0.6) {
+        return { 
+            type: 'partial', 
+            message: `⚡ Good work! ${correctCount}/${totalItems} correct. ${feedback.join(', ')}`,
+            score: score
+        };
+    } else {
+        return { 
+            type: 'incorrect', 
+            message: `✗ Needs improvement. ${correctCount}/${totalItems} correct. ${feedback.join(', ')}`,
+            score: 0
+        };
+    }
 }
 
 // Restore previous answer

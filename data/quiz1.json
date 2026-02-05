@@ -13,6 +13,10 @@
       "question": "What is the Internet, and what role do protocols play in it?",
       "points": 5,
       "hint": "<h4>Approach:</h4><div class='step'><span class='step-number'>1.</span>Define what the Internet is at a high level</div><div class='step'><span class='step-number'>2.</span>Describe its physical components (devices, links, switches)</div><div class='step'><span class='step-number'>3.</span>Explain what protocols are and their purpose</div><div class='step'><span class='step-number'>4.</span>Give examples of common protocols and their functions</div><ul><li><strong>Key concepts to cover:</strong> Network of networks, hosts/end systems, packet switches, communication rules</li><li><strong>Examples:</strong> HTTP, SMTP, TCP/IP, DNS</li></ul>",
+      "keywords": {
+        "required": ["network", "protocol", "communication", "internet"],
+        "bonus": ["hosts", "switches", "routers", "http", "tcp", "global", "interconnected"]
+      },
       "answer": "The Internet is a global network of interconnected computer networks that enables communication and information sharing worldwide. It consists of billions of computing devices (hosts/end systems) connected through various types of links and packet switches (routers and link-layer switches). Protocols play a crucial role as they define the format, order of messages sent and received among network entities, and the actions taken on message transmission and receipt. They provide the rules and conventions that enable different devices and software to communicate effectively. Examples include HTTP for web browsing, SMTP for email, TCP/IP for reliable data transmission, etc."
     },
     {
@@ -41,6 +45,10 @@
       "type": "short_answer",
       "question": "What is packet switching, and why is it used?",
       "points": 5,
+      "keywords": {
+        "required": ["packet", "switching", "messages", "independent"],
+        "bonus": ["efficient", "resource", "sharing", "fault tolerance", "bursty"]
+      },
       "answer": "Packet switching is a method of data transmission where messages are broken into small units called packets, each containing destination address and sequence information. Each packet is forwarded independently through the network. Why it's used: Efficient resource sharing (no dedicated circuits needed), Better fault tolerance (alternative paths available), More flexible and scalable than circuit switching, Allows statistical multiplexing of resources, Cost-effective for bursty data traffic"
     },
     {
@@ -56,6 +64,10 @@
       "question": "What are the types of delays in a network?",
       "points": 5,
       "hint": "<h4>Network Delay Components:</h4><div class='step'><span class='step-number'>1.</span>Think about what happens when a packet travels through a router</div><div class='step'><span class='step-number'>2.</span>Consider the sequence: Arrival → Processing → Queuing → Transmission → Propagation</div><div class='step'><span class='step-number'>3.</span>For each step, identify the time delay</div><ul><li><strong>Processing:</strong> Time to examine packet and decide where to send it</li><li><strong>Queueing:</strong> Time waiting in line for transmission</li><li><strong>Transmission:</strong> Time to push bits onto the wire (L/R)</li><li><strong>Propagation:</strong> Time for signal to travel the physical distance (d/s)</li></ul>",
+      "keywords": {
+        "required": ["processing", "queuing", "transmission", "propagation"],
+        "bonus": ["delay", "packet", "router", "l/r", "d/s"]
+      },
       "answer": "Four main types of delays: 1. PROCESSING DELAY: Time to examine packet header, check for errors, and determine output link, 2. QUEUEING DELAY: Time spent waiting in output queue before transmission, 3. TRANSMISSION DELAY: Time to push all packet bits onto the link (L/R), 4. PROPAGATION DELAY: Time for signal to travel from source to destination (d/s). Total nodal delay = Processing + Queueing + Transmission + Propagation"
     },
     {
@@ -70,6 +82,10 @@
       "type": "short_answer",
       "question": "What is throughput in networking?",
       "points": 5,
+      "keywords": {
+        "required": ["throughput", "rate", "transmitted", "bits per second"],
+        "bonus": ["bottleneck", "bandwidth", "instantaneous", "average", "end-to-end"]
+      },
       "answer": "Throughput is the actual rate at which data is successfully transmitted between source and destination, measured in bits per second (bps). Types: INSTANTANEOUS THROUGHPUT: Rate at any given instant, AVERAGE THROUGHPUT: Average rate over longer time period, END-TO-END THROUGHPUT: Limited by bottleneck link (minimum capacity link in path). Throughput ≤ Bandwidth due to factors like congestion, protocol overhead, and network conditions."
     },
     {
@@ -129,6 +145,10 @@
       "type": "short_answer",
       "question": "Write distinction between routing versus forwarding.",
       "points": 5,
+      "keywords": {
+        "required": ["routing", "forwarding", "path", "table"],
+        "bonus": ["network-wide", "local", "control plane", "data plane", "algorithms"]
+      },
       "answer": "ROUTING: Network-wide process that determines end-to-end paths, Creates and maintains routing tables/forwarding tables, Uses routing algorithms (e.g., OSPF, BGP), Operates on longer timescales, Control plane function. FORWARDING: Local action at each router, Moves packets from input link to appropriate output link, Uses forwarding table created by routing process, Operates on packet timescales (nanoseconds), Data plane function"
     },
     {
@@ -138,6 +158,7 @@
       "image": "q15.png",
       "points": 4,
       "hint": "<h4>Circuit Switching Approach:</h4><div class='step'><span class='step-number'>1.</span>Understand that in circuit switching, each connection needs a dedicated circuit</div><div class='step'><span class='step-number'>2.</span>Each link can handle multiple simultaneous connections up to its circuit capacity</div><div class='step'><span class='step-number'>3.</span>The maximum connections = sum of all link capacities</div><div class='formula'>Total connections = Circuits(A-B) + Circuits(B-C) + Circuits(C-D) + Circuits(D-A)</div><ul><li><strong>Key insight:</strong> Unlike packet switching, circuit switching reserves dedicated paths</li><li><strong>Each circuit can carry one connection simultaneously</strong></li></ul>",
+      "expectedAnswers": ["70", "70 connections", "70 circuits"],
       "answer": "70 connections (sum of all links: 20 + 19 + 15 + 16 = 70)"
     },
     {
@@ -145,6 +166,11 @@
       "type": "multi_part",
       "question": "Consider a scenario in which 5 users are being multiplexed over a 10 Mbps channel. Under the following scenarios, determine whether circuit switching, packet switching, or neither is better suited for the situation.",
       "hint": "<h4>Circuit vs Packet Switching Analysis:</h4><div class='step'><span class='step-number'>1.</span>For Circuit Switching: Check if total demand ≤ channel capacity</div><div class='formula'>Total demand = Number of users × Rate per user</div><div class='step'><span class='step-number'>2.</span>For Packet Switching: Check if peak rate fits and average utilization is reasonable</div><div class='step'><span class='step-number'>3.</span>Compare: Constant rate → Circuit; Bursty traffic → Packet</div><ul><li><strong>Circuit switching:</strong> Dedicated bandwidth, works if total ≤ capacity</li><li><strong>Packet switching:</strong> Statistical multiplexing, handles bursts better</li><li><strong>Neither:</strong> When requirements exceed capacity fundamentally</li></ul>",
+      "expectedAnswers": {
+        "A": ["neither", "neither - total demand exceeds capacity"],
+        "B": ["circuit switching", "circuit"],
+        "C": ["packet switching", "packet"]
+      },
       "parts": [
         {
           "part": "A",
@@ -173,22 +199,26 @@
         {
           "id": 1,
           "description": "Time needed to perform an integrity check, look up packet information in a local table, and move the packet from an input link to an output link in a router.",
-          "answer": "Processing delay"
+          "answer": "Processing delay",
+          "correctAnswer": "Processing delay"
         },
         {
           "id": 2,
           "description": "Time spent waiting in packet buffers for link transmission due to congestion or scheduling.",
-          "answer": "Queueing delay"
+          "answer": "Queueing delay",
+          "correctAnswer": "Queueing delay"
         },
         {
           "id": 3,
           "description": "Time spent transmitting the packet's bits into the link (i.e., from sender's buffer onto the wire).",
-          "answer": "Transmission delay"
+          "answer": "Transmission delay",
+          "correctAnswer": "Transmission delay"
         },
         {
           "id": 4,
           "description": "Time needed for bits to physically propagate through the transmission medium from one end of a link to the other.",
-          "answer": "Propagation delay"
+          "answer": "Propagation delay",
+          "correctAnswer": "Propagation delay"
         }
       ],
       "points": 4
@@ -200,6 +230,7 @@
       "image": "q18.png",
       "points": 4,
       "hint": "<h4>Throughput Analysis Approach:</h4><div class='step'><span class='step-number'>1.</span>Identify all link capacities in the path: Server→Middle→Client</div><div class='step'><span class='step-number'>2.</span>Calculate middle link capacity per flow: Total middle capacity ÷ Number of flows</div><div class='step'><span class='step-number'>3.</span>Find the bottleneck: minimum capacity among all hops</div><div class='formula'>Bottleneck = min(Server_capacity, Middle_per_flow, Client_capacity)</div><div class='step'><span class='step-number'>4.</span>The bottleneck determines maximum throughput</div><ul><li><strong>Server links:</strong> RS = 50 Mbps each</li><li><strong>Middle link per flow:</strong> R/4 = 300/4 = 75 Mbps</li><li><strong>Client links:</strong> RC = 90 Mbps each</li></ul>",
+      "expectedAnswers": ["50", "50 Mbps", "50 mbps"],
       "answer": "50 Mbps - The bottleneck is the server links at 50 Mbps each. Middle link capacity (300/4 = 75 Mbps per flow) and client links (90 Mbps) are higher."
     },
     {
@@ -211,27 +242,32 @@
         {
           "id": 1,
           "description": "Application layer",
-          "answer": "Message"
+          "answer": "Message",
+          "correctAnswer": "Message"
         },
         {
           "id": 2,
           "description": "Transport layer",
-          "answer": "Segment"
+          "answer": "Segment",
+          "correctAnswer": "Segment"
         },
         {
           "id": 3,
           "description": "Network layer",
-          "answer": "Datagram"
+          "answer": "Datagram",
+          "correctAnswer": "Datagram"
         },
         {
           "id": 4,
           "description": "Link layer",
-          "answer": "Frame"
+          "answer": "Frame",
+          "correctAnswer": "Frame"
         },
         {
           "id": 5,
           "description": "Physical layer",
-          "answer": "Bit"
+          "answer": "Bit",
+          "correctAnswer": "Bit"
         }
       ],
       "points": 5
@@ -263,6 +299,12 @@
           "answer": "Yes - A to C needs 11 ≤ 13 (A-B capacity), B to D needs 13 ≤ 15 (C-D capacity). Both can be accommodated."
         }
       ],
+      "expectedAnswers": {
+        "1.1": ["64", "64 connections"],
+        "1.2": ["no", "no - all circuits are already in use"],
+        "1.3": ["28", "28 connections"],
+        "1.4": ["yes", "yes - both can be accommodated"]
+      },
       "points": 8
     },
     {
@@ -291,6 +333,12 @@
           "answer": "0.20 - 20 Mbps ÷ 100 Mbps = 0.20"
         }
       ],
+      "expectedAnswers": {
+        "2.1": ["5", "5 users"],
+        "2.2": ["no", "no - exceeds capacity"],
+        "2.3": ["0.034", "0.033554", "0.03"],
+        "2.5": ["0.2", "0.20"]
+      },
       "points": 8
     },
     {
@@ -330,6 +378,14 @@
           "answer": "Yes - During the 20-second propagation delay between tollbooths"
         }
       ],
+      "expectedAnswers": {
+        "3.1": ["2", "2 seconds"],
+        "3.2": ["40", "40 seconds"],
+        "3.3": ["20", "20 seconds"],
+        "3.4": ["20", "20 seconds"],
+        "3.5": ["no", "no - store-and-forward"],
+        "3.6": ["yes", "yes - during propagation delay"]
+      },
       "points": 12
     },
     {
@@ -349,6 +405,10 @@
         }
       ],
       "hint": "<h4>Transmission Delay Calculations:</h4><div class='step'><span class='step-number'>1.</span>For transmission delay: Use the formula</div><div class='formula'>Transmission Delay = L/R (packet length / transmission rate)</div><div class='step'><span class='step-number'>2.</span>For maximum packets per second: Think about how many packets fit in one second</div><div class='formula'>Max packets/sec = R/L (transmission rate / packet length)</div><ul><li><strong>Units matter:</strong> Convert Mbps to bps (multiply by 10^6)</li><li><strong>L = 8000 bits, R = 1 Mbps = 1×10^6 bps</strong></li></ul>",
+      "expectedAnswers": {
+        "4.1": ["0.008", "0.008 seconds", "8 milliseconds", "8ms"],
+        "4.2": ["125", "125 packets/sec", "125 packets per second"]
+      },
       "points": 4
     },
     {
@@ -368,6 +428,10 @@
           "answer": "0 - The buffer has a maximum capacity of 899 packets, and only 800 packets are arriving. Since the number of arriving packets is less than the buffer's maximum size, all of them can be accommodated without any being dropped."
         }
       ],
+      "expectedAnswers": {
+        "5.1": ["yes", "yes - bursty traffic"],
+        "5.2": ["0", "0 packets", "zero"]
+      },
       "points": 6
     },
     {
@@ -387,6 +451,10 @@
           "answer": "0.00001 seconds"
         }
       ],
+      "expectedAnswers": {
+        "6.1": ["0.0016", "0.0016 seconds"],
+        "6.2": ["0.00001", "0.00001 seconds"]
+      },
       "points": 4
     },
     {
@@ -395,6 +463,7 @@
       "question": "Consider the scenario shown below, with four different servers connected to four different clients over four three-hop paths. The four pairs share a common middle hop with a transmission capacity of R = 200 Mbps. The four links from the servers to the shared link have a transmission capacity of RS = 70 Mbps. Each of the four links from the shared middle link to a client has a transmission capacity of RC = 20 Mbps. What is the maximum achievable end-end throughput (in Mbps) for each of four client-to-server pairs, assuming that the middle link is fairly shared (divides its transmission rate equally)?",
       "image": "qQ7.png",
       "points": 4,
+      "expectedAnswers": ["20", "20 Mbps", "20 mbps"],
       "answer": "20 Mbps - The bottleneck is the client links at 20 Mbps each. The middle link capacity (200/4 = 50 Mbps per flow) and server links (70 Mbps) are higher."
     }
   ]
