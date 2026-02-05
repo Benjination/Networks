@@ -3,8 +3,8 @@ let quizzes = [];
 let userProgress = {};
 
 // Initialize the application
-document.addEventListener('DOMContentLoaded', function() {
-    loadQuizzes();
+document.addEventListener('DOMContentLoaded', async function() {
+    await loadQuizzes();
     loadUserProgress();
     updateStats();
     renderQuizzes();
