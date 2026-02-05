@@ -24,6 +24,11 @@
       "type": "short_answer",
       "question": "What is the network edge, and what are its components?",
       "points": 5,
+      "hint": "<h4>Network Edge Approach:</h4><div class='step'><span class='step-number'>1.</span>Define what the network edge represents in network architecture</div><div class='step'><span class='step-number'>2.</span>Identify the main components that make up the edge</div><div class='step'><span class='step-number'>3.</span>Distinguish between end systems and access methods</div><ul><li><strong>Key components:</strong> End systems/hosts, Access networks, Physical media</li><li><strong>Think about:</strong> Where users interact with the network vs. the core infrastructure</li></ul>",
+      "keywords": {
+        "required": ["edge", "end systems", "hosts", "access"],
+        "bonus": ["devices", "applications", "users", "interface", "physical media"]
+      },
       "answer": "The network edge consists of the end systems (hosts) that are connected to the Internet. These are the devices where applications run and where users interact with the network. Components include: End systems/hosts (computers, smartphones, servers, IoT devices), Access networks (residential access like DSL/cable/fiber, institutional access like Ethernet/WiFi, mobile access like 4G/5G), Physical media (guided media like fiber, coax, twisted pair; unguided media like wireless)"
     },
     {
@@ -31,6 +36,11 @@
       "type": "short_answer",
       "question": "What is the difference between a client and a server in networking?",
       "points": 5,
+      "hint": "<h4>Client-Server Architecture:</h4><div class='step'><span class='step-number'>1.</span>Define what a client does in network communication</div><div class='step'><span class='step-number'>2.</span>Define what a server does in network communication</div><div class='step'><span class='step-number'>3.</span>Explain the key differences in behavior and roles</div><ul><li><strong>Client behavior:</strong> Initiates requests, seeks services</li><li><strong>Server behavior:</strong> Waits for requests, provides services</li><li><strong>Consider:</strong> Which one starts communication? Which one responds?</li></ul>",
+      "keywords": {
+        "required": ["client", "server", "requests", "services"],
+        "bonus": ["initiates", "responds", "communication", "waits", "provides"]
+      },
       "answer": "CLIENT: A program or device that requests services from another program or device. It initiates communication by sending requests. SERVER: A program or device that provides services to clients. It waits for and responds to requests from clients. Key differences: Clients initiate communication; servers wait for requests. Servers typically run continuously; clients connect as needed. A single server can serve multiple clients simultaneously. The same device can act as both client and server for different services."
     },
     {
@@ -38,6 +48,11 @@
       "type": "short_answer",
       "question": "What is the function of the network core in the Internet?",
       "points": 5,
+      "hint": "<h4>Network Core Functions:</h4><div class='step'><span class='step-number'>1.</span>Describe the physical structure of the network core</div><div class='step'><span class='step-number'>2.</span>Explain the main function: moving data between sources and destinations</div><div class='step'><span class='step-number'>3.</span>List the key processes involved in data forwarding</div><ul><li><strong>Components:</strong> Routers, switches, interconnected mesh</li><li><strong>Key functions:</strong> Packet switching, routing, forwarding</li><li><strong>Goal:</strong> Reliable data delivery between end systems</li></ul>",
+      "keywords": {
+        "required": ["core", "routers", "switches", "forwarding"],
+        "bonus": ["packet switching", "routing", "mesh", "destination", "interconnected"]
+      },
       "answer": "The network core is the mesh of interconnected routers and switches that forward packets from source to destination. Its main functions include: Packet switching: Breaking data into packets and forwarding them independently, Routing: Determining the best path for packets to reach their destination, Forwarding: Moving packets from input links to appropriate output links, Managing network traffic and congestion, Providing redundancy and fault tolerance through multiple paths"
     },
     {
@@ -45,6 +60,7 @@
       "type": "short_answer",
       "question": "What is packet switching, and why is it used?",
       "points": 5,
+      "hint": "<h4>Packet Switching Fundamentals:</h4><div class='step'><span class='step-number'>1.</span>Define how packet switching works (break data into packets)</div><div class='step'><span class='step-number'>2.</span>Explain how packets are forwarded independently</div><div class='step'><span class='step-number'>3.</span>List the advantages over circuit switching</div><ul><li><strong>Key concept:</strong> Data broken into small units with addressing info</li><li><strong>Benefits:</strong> Efficient resource sharing, fault tolerance, flexibility</li><li><strong>Why used:</strong> Better for bursty traffic, cost-effective</li></ul>",
       "keywords": {
         "required": ["packet", "switching", "messages", "independent"],
         "bonus": ["efficient", "resource", "sharing", "fault tolerance", "bursty"]
@@ -56,6 +72,11 @@
       "type": "short_answer",
       "question": "How does packet switching differ from circuit switching?",
       "points": 5,
+      "hint": "<h4>Switching Method Comparison:</h4><div class='step'><span class='step-number'>1.</span>Describe circuit switching characteristics (dedicated path)</div><div class='step'><span class='step-number'>2.</span>Describe packet switching characteristics (shared resources)</div><div class='step'><span class='step-number'>3.</span>Compare advantages and use cases for each</div><ul><li><strong>Circuit switching:</strong> Dedicated connection, guaranteed resources, constant delay</li><li><strong>Packet switching:</strong> Shared resources, statistical multiplexing, variable delay</li><li><strong>Key difference:</strong> Resource reservation vs. resource sharing</li></ul>",
+      "keywords": {
+        "required": ["circuit", "packet", "switching", "dedicated", "shared"],
+        "bonus": ["connection", "resources", "multiplexing", "path", "guaranteed"]
+      },
       "answer": "CIRCUIT SWITCHING: Establishes dedicated end-to-end connection before communication, Resources reserved for entire call duration, Guaranteed bandwidth and performance, Used in traditional telephone networks, More suitable for continuous, constant-rate traffic. PACKET SWITCHING: No dedicated path; packets forwarded independently, Resources shared among users (statistical multiplexing), Variable delay and throughput, More efficient for bursty traffic, Better resource utilization"
     },
     {
@@ -75,6 +96,11 @@
       "type": "short_answer",
       "question": "What is packet loss, and what causes it?",
       "points": 5,
+      "hint": "<h4>Packet Loss Analysis:</h4><div class='step'><span class='step-number'>1.</span>Define what packet loss means in networking</div><div class='step'><span class='step-number'>2.</span>Identify the main causes of packet loss</div><div class='step'><span class='step-number'>3.</span>Consider both hardware and network congestion factors</div><ul><li><strong>Definition:</strong> Packets fail to reach their destination</li><li><strong>Main causes:</strong> Buffer overflow, network congestion, hardware failures</li><li><strong>Think about:</strong> What happens when routers get overloaded?</li></ul>",
+      "keywords": {
+        "required": ["packet loss", "dropped", "buffer", "congestion"],
+        "bonus": ["overflow", "capacity", "hardware", "failures", "discarded"]
+      },
       "answer": "Packet loss occurs when packets are dropped/discarded in the network and fail to reach their destination. Causes: Buffer overflow: Queues become full, arriving packets are dropped, Network congestion: Too much traffic exceeds link capacity, Hardware failures: Router/switch malfunctions, Transmission errors: Corrupted packets are discarded, Network configuration issues"
     },
     {
@@ -82,6 +108,7 @@
       "type": "short_answer",
       "question": "What is throughput in networking?",
       "points": 5,
+      "hint": "<h4>Throughput vs Bandwidth:</h4><div class='step'><span class='step-number'>1.</span>Define throughput as actual data transfer rate achieved</div><div class='step'><span class='step-number'>2.</span>Distinguish between instantaneous and average throughput</div><div class='step'><span class='step-number'>3.</span>Explain factors that limit throughput</div><ul><li><strong>Key concept:</strong> Actual rate of successful data transmission</li><li><strong>Units:</strong> Bits per second (bps), Mbps, Gbps</li><li><strong>Limitation:</strong> Throughput ≤ Bandwidth due to bottlenecks</li></ul>",
       "keywords": {
         "required": ["throughput", "rate", "transmitted", "bits per second"],
         "bonus": ["bottleneck", "bandwidth", "instantaneous", "average", "end-to-end"]
@@ -93,12 +120,18 @@
       "type": "short_answer",
       "question": "Why is layering used in network architecture?",
       "points": 5,
+      "hint": "<h4>Network Layering Benefits:</h4><div class='step'><span class='step-number'>1.</span>Think about software engineering principles</div><div class='step'><span class='step-number'>2.</span>Consider how layers hide complexity from each other</div><div class='step'><span class='step-number'>3.</span>List the advantages for development and maintenance</div><ul><li><strong>Key benefits:</strong> Modularity, abstraction, interoperability</li><li><strong>Development advantages:</strong> Independent development, reusability</li><li><strong>Maintenance:</strong> Changes in one layer don't affect others</li></ul>",
+      "keywords": {
+        "required": ["layering", "modularity", "abstraction", "interoperability"],
+        "bonus": ["maintainability", "reusability", "independent", "complexity", "interfaces"]
+      },
       "answer": "Layering provides several benefits: MODULARITY: Each layer focuses on specific functions, ABSTRACTION: Lower layers hide complexity from upper layers, INTEROPERABILITY: Standardized interfaces enable different implementations, MAINTAINABILITY: Changes in one layer don't affect others, REUSABILITY: Layers can be reused across different applications, DISTRIBUTED DEVELOPMENT: Different teams can work on different layers"
     },
     {
       "id": 11,
       "type": "multiple_choice",
       "question": "Which of the following descriptions correspond to a \"services\" view of the Internet? Select one or more correct answers. [Hint: more than one answer is correct]",
+      "hint": "<h4>Services vs. Nuts-and-Bolts View:</h4><div class='step'><span class='step-number'>1.</span>Think about the Internet from a user's perspective</div><div class='step'><span class='step-number'>2.</span>Consider what the Internet enables rather than how it works</div><div class='step'><span class='step-number'>3.</span>Focus on applications and user experiences</div><ul><li><strong>Services view:</strong> What can you DO with the Internet?</li><li><strong>Not services view:</strong> Technical details about hardware and protocols</li></ul>",
       "options": [
         "A. A platform for building network applications.",
         "B. A collection of hardware and software components executing protocols that define the format and the order of messages exchanged between two or more communicating entities, as well as the actions taken on the transmission and/or receipt of a message or other event.",
@@ -114,6 +147,7 @@
       "id": 12,
       "type": "multiple_choice",
       "question": "Which of the following human scenarios involve a protocol? (recall: \"Protocols define the format, order of messages sent and received among network entities, and actions taken on message transmission, receipt\") Select one or more correct answers. [Hint: more than one answer is correct]",
+      "hint": "<h4>Human Protocol Analysis:</h4><div class='step'><span class='step-number'>1.</span>Apply the protocol definition to human interactions</div><div class='step'><span class='step-number'>2.</span>Look for structured message exchange patterns</div><div class='step'><span class='step-number'>3.</span>Identify scenarios with defined rules and responses</div><ul><li><strong>Protocol elements:</strong> Format, order, actions on transmission/receipt</li><li><strong>Look for:</strong> Back-and-forth communication with rules</li><li><strong>Not protocols:</strong> One-way activities or unstructured interactions</li></ul>",
       "options": [
         "A. Two people introducing themselves to each other.",
         "B. A person reading a book.",
@@ -129,6 +163,7 @@
       "id": 13,
       "type": "single_choice",
       "question": "Which of the following physical layer technologies has the highest transmission rate and lowest bit error rate in practice?",
+      "hint": "<h4>Physical Media Comparison:</h4><div class='step'><span class='step-number'>1.</span>Consider the fundamental properties of each medium</div><div class='step'><span class='step-number'>2.</span>Think about which medium is least susceptible to interference</div><div class='step'><span class='step-number'>3.</span>Consider both speed and reliability factors</div><ul><li><strong>Key factors:</strong> Transmission rate (speed) and bit error rate (reliability)</li><li><strong>Think about:</strong> Guided vs. unguided media, interference susceptibility</li><li><strong>Modern networks:</strong> What do high-speed networks use for backbone connections?</li></ul>",
       "options": [
         "1. Fiber optic cable",
         "2. 4G/5G cellular",
@@ -145,6 +180,7 @@
       "type": "short_answer",
       "question": "Write distinction between routing versus forwarding.",
       "points": 5,
+      "hint": "<h4>Routing vs Forwarding:</h4><div class='step'><span class='step-number'>1.</span>Define routing as the network-wide path determination process</div><div class='step'><span class='step-number'>2.</span>Define forwarding as the local packet movement at each router</div><div class='step'><span class='step-number'>3.</span>Compare their scope, timeframe, and functions</div><ul><li><strong>Routing:</strong> Control plane, creates tables, network-wide, slower timescale</li><li><strong>Forwarding:</strong> Data plane, uses tables, local action, fast timescale</li><li><strong>Analogy:</strong> Routing = planning route, Forwarding = following directions</li></ul>",
       "keywords": {
         "required": ["routing", "forwarding", "path", "table"],
         "bonus": ["network-wide", "local", "control plane", "data plane", "algorithms"]
@@ -194,6 +230,7 @@
       "id": 17,
       "type": "matching",
       "question": "Match each network delay description with its correct type of delay:",
+      "hint": "<h4>Network Delay Types:</h4><div class='step'><span class='step-number'>1.</span>Think about the sequence of events when a packet arrives at a router</div><div class='step'><span class='step-number'>2.</span>Consider what happens: examine → wait → transmit → travel</div><div class='step'><span class='step-number'>3.</span>Match each description to its corresponding delay type</div><ul><li><strong>Processing:</strong> Router examines and decides</li><li><strong>Queueing:</strong> Waiting in buffers</li><li><strong>Transmission:</strong> Pushing bits onto link (L/R)</li><li><strong>Propagation:</strong> Signal travel time (d/s)</li></ul>",
       "options": ["Transmission delay", "Processing delay", "Queueing delay", "Propagation delay"],
       "items": [
         {
@@ -237,6 +274,7 @@
       "id": 19,
       "type": "matching",
       "question": "Match each Internet layer with the correct unit of data that is exchanged among protocol entities at that layer.",
+      "hint": "<h4>Internet Layer Data Units:</h4><div class='step'><span class='step-number'>1.</span>Think about what each layer handles from top to bottom</div><div class='step'><span class='step-number'>2.</span>Consider the abstraction level at each layer</div><div class='step'><span class='step-number'>3.</span>Remember: higher layers = bigger units, lower layers = smaller units</div><ul><li><strong>Application:</strong> Complete user messages</li><li><strong>Transport:</strong> End-to-end delivery units</li><li><strong>Network:</strong> Routing units</li><li><strong>Link:</strong> Hop-by-hop units</li><li><strong>Physical:</strong> Basic electrical signals</li></ul>",
       "options": ["Message", "Bit", "Segment", "Datagram", "Frame"],
       "items": [
         {
@@ -277,6 +315,7 @@
       "type": "multi_part",
       "question": "Consider the circuit-switched network shown in the figure below, with circuit switches A, B, C, and D. Suppose there are 13 circuits between A and B, 19 circuits between B and C, 15 circuits between C and D, and 17 circuits between D and A.",
       "image": "qQ1.png",
+      "hint": "<h4>Circuit Switching with Constraints:</h4><div class='step'><span class='step-number'>1.</span>For max connections: Add all link capacities</div><div class='step'><span class='step-number'>2.</span>For overload: Consider what happens when capacity is exceeded</div><div class='step'><span class='step-number'>3.</span>For constrained routing: Find bottleneck links for each path</div><div class='step'><span class='step-number'>4.</span>For accommodation: Check if demand ≤ path capacity</div><ul><li><strong>Total capacity:</strong> Sum of all individual link capacities</li><li><strong>Path constraints:</strong> Minimum capacity along the path</li><li><strong>Clockwise paths:</strong> A→B→C, B→C→D, etc.</li></ul>",
       "parts": [
         {
           "part": "1.1",
@@ -416,6 +455,7 @@
       "type": "multi_part",
       "question": "Consider the queuing delay in a router buffer, where the packet experiences a delay as it waits to be transmitted onto the link. Assume a constant transmission rate of R = 800000 bps, a constant packet-length L = 3900 bits, and a is the average rate of packets/second. Traffic intensity I = La/R, and the queuing delay is calculated as I(L/R)(1 - I) for I < 1.",
       "image": "qQ5.png",
+      "hint": "<h4>Queuing Delay Analysis:</h4><div class='step'><span class='step-number'>1.</span>For variability: Consider if real network traffic is constant or bursty</div><div class='step'><span class='step-number'>2.</span>For buffer analysis: Compare arriving packets vs buffer capacity</div><div class='step'><span class='step-number'>3.</span>Remember: Drops occur only when arrivals exceed buffer size</div><ul><li><strong>Real traffic:</strong> Bursty and unpredictable, causing delay variations</li><li><strong>Buffer capacity:</strong> Maximum packets that can be stored</li><li><strong>Drop condition:</strong> When arrivals > buffer capacity</li></ul>",
       "parts": [
         {
           "part": "5.1",
@@ -439,6 +479,7 @@
       "type": "multi_part",
       "question": "Computing end-end delay (transmission and propagation delay). Consider the figure below, with three links, each with the specified transmission rate and link length.",
       "image": "qQ6.png",
+      "hint": "<h4>End-to-End Delay Calculation:</h4><div class='step'><span class='step-number'>1.</span>Calculate transmission delay: T_trans = L/R (packet size / transmission rate)</div><div class='step'><span class='step-number'>2.</span>Calculate propagation delay: T_prop = d/s (distance / speed of light)</div><div class='step'><span class='step-number'>3.</span>Total delay = sum of all transmission + propagation delays</div><ul><li><strong>Transmission delay:</strong> Time to push all bits onto link</li><li><strong>Propagation delay:</strong> Time for signal to travel the link</li><li><strong>Speed of light:</strong> 3×10⁸ m/s</li></ul>",
       "parts": [
         {
           "part": "6.1",
@@ -462,6 +503,7 @@
       "type": "calculation",
       "question": "Consider the scenario shown below, with four different servers connected to four different clients over four three-hop paths. The four pairs share a common middle hop with a transmission capacity of R = 200 Mbps. The four links from the servers to the shared link have a transmission capacity of RS = 70 Mbps. Each of the four links from the shared middle link to a client has a transmission capacity of RC = 20 Mbps. What is the maximum achievable end-end throughput (in Mbps) for each of four client-to-server pairs, assuming that the middle link is fairly shared (divides its transmission rate equally)?",
       "image": "qQ7.png",
+      "hint": "<h4>Throughput Bottleneck Analysis:</h4><div class='step'><span class='step-number'>1.</span>Identify all link capacities in the path</div><div class='step'><span class='step-number'>2.</span>For shared links: divide capacity by number of flows</div><div class='step'><span class='step-number'>3.</span>Find the minimum capacity (bottleneck) in the path</div><ul><li><strong>Server links:</strong> 70 Mbps each</li><li><strong>Middle link (shared):</strong> 200/4 = 50 Mbps per flow</li><li><strong>Client links:</strong> 20 Mbps each</li><li><strong>Bottleneck:</strong> Minimum of these three values</li></ul>",
       "points": 4,
       "expectedAnswers": ["20", "20 Mbps", "20 mbps"],
       "answer": "20 Mbps - The bottleneck is the client links at 20 Mbps each. The middle link capacity (200/4 = 50 Mbps per flow) and server links (70 Mbps) are higher."
