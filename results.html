@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results - Networking Study Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="results-header">
+                <a href="index.html" class="back-btn">← Back to Home</a>
+                <h1 class="results-title">Quiz Results</h1>
+            </div>
+        </header>
+
+        <main class="results-main">
+            <div class="score-summary" id="scoreSummary">
+                <div class="score-circle">
+                    <div class="score-number" id="scoreNumber">0%</div>
+                    <div class="score-label">Final Score</div>
+                </div>
+                <div class="score-details">
+                    <div class="score-stat">
+                        <span class="stat-value" id="correctCount">0</span>
+                        <span class="stat-label">Correct</span>
+                    </div>
+                    <div class="score-stat">
+                        <span class="stat-value" id="incorrectCount">0</span>
+                        <span class="stat-label">Incorrect</span>
+                    </div>
+                    <div class="score-stat">
+                        <span class="stat-value" id="unansweredCount">0</span>
+                        <span class="stat-label">Unanswered</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results-actions">
+                <button class="btn btn-outline" onclick="reviewDetails()">Review Detailed Answers</button>
+                <button class="btn btn-primary" onclick="retakeQuiz()">Retake Quiz</button>
+                <button class="btn btn-secondary" onclick="goHome()">Back to Home</button>
+            </div>
+
+            <div class="answer-review" id="answerReview">
+                <h2>Detailed Review</h2>
+                <div class="review-list" id="reviewList">
+                    <!-- Detailed answer review will be populated -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="results.js"></script>
+</body>
+</html>

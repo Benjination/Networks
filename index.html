@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Networking Study Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">🌐 Networking Study Hub</h1>
+            <p class="subtitle">Master networking concepts with interactive quizzes</p>
+        </header>
+
+        <main class="main">
+            <section class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalQuizzes">0</div>
+                        <div class="stat-label">Total Quizzes</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="completedQuizzes">0</div>
+                        <div class="stat-label">Completed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="averageScore">0%</div>
+                        <div class="stat-label">Average Score</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="quizzes-section">
+                <h2 class="section-title">Available Quizzes</h2>
+                <div class="quiz-grid" id="quizGrid">
+                    <!-- Quiz cards will be dynamically populated -->
+                </div>
+            </section>
+
+            <section class="recent-section">
+                <h2 class="section-title">Recent Activity</h2>
+                <div class="recent-list" id="recentActivity">
+                    <p class="no-activity">No recent activity. Start a quiz to see your progress here!</p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2026 Networking Study Hub - Built for mastering network fundamentals</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

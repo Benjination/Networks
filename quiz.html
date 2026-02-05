@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Networking Study Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="quiz-header">
+                <a href="index.html" class="back-btn">← Back to Home</a>
+                <h1 class="quiz-title" id="quizTitle">Loading Quiz...</h1>
+                <div class="quiz-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <span class="progress-text" id="progressText">0 / 0</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="quiz-main">
+            <div class="quiz-container">
+                <div class="question-card" id="questionCard">
+                    <div class="question-number" id="questionNumber"></div>
+                    <h2 class="question-text" id="questionText"></h2>
+                    <div class="question-type-indicator" id="questionType"></div>
+                    
+                    <div class="answer-section" id="answerSection">
+                        <!-- Answer inputs will be dynamically generated -->
+                    </div>
+                    
+                    <div class="question-actions">
+                        <button class="btn btn-secondary" id="prevBtn" onclick="previousQuestion()">Previous</button>
+                        <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">Next</button>
+                    </div>
+                </div>
+
+                <div class="quiz-sidebar">
+                    <div class="question-nav">
+                        <h3>Questions</h3>
+                        <div class="nav-grid" id="questionNav">
+                            <!-- Question navigation will be populated -->
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-actions">
+                        <button class="btn btn-outline" onclick="reviewAnswers()">Review Answers</button>
+                        <button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal" id="submitModal">
+        <div class="modal-content">
+            <h3>Submit Quiz?</h3>
+            <p>Are you ready to submit your quiz? You can review your answers before submitting.</p>
+            <div class="modal-actions">
+                <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="confirmSubmit()">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="quiz.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+{
+  "quizzes": [
+    {
+      "id": "quiz1",
+      "title": "Quiz 1: Internet and Network Fundamentals",
+      "description": "Test your knowledge of Internet basics, network architecture, and core networking concepts",
+      "category": "fundamentals",
+      "difficulty": "beginner",
+      "estimatedTime": "30 minutes",
+      "totalQuestions": 14,
+      "isActive": true,
+      "createdDate": "2026-02-05",
+      "tags": ["internet", "protocols", "networking-basics", "architecture"]
+    }
+  ],
+  "categories": [
+    {
+      "id": "fundamentals",
+      "name": "Network Fundamentals",
+      "description": "Basic networking concepts and principles",
+      "color": "#667eea"
+    },
+    {
+      "id": "protocols",
+      "name": "Network Protocols",
+      "description": "TCP/IP, HTTP, DNS and other networking protocols",
+      "color": "#38a169"
+    },
+    {
+      "id": "security",
+      "name": "Network Security",
+      "description": "Cryptography, firewalls, and network security concepts",
+      "color": "#e53e3e"
+    },
+    {
+      "id": "performance",
+      "name": "Network Performance",
+      "description": "Optimization, QoS, and performance analysis",
+      "color": "#d69e2e"
+    }
+  ]
+}

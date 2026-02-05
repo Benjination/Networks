@@ -1,0 +1,133 @@
+{
+  "id": "quiz1",
+  "title": "Quiz 1: Internet and Network Fundamentals",
+  "description": "Test your knowledge of Internet basics, network architecture, and core networking concepts",
+  "category": "fundamentals",
+  "difficulty": "beginner",
+  "estimatedTime": "30 minutes",
+  "totalQuestions": 14,
+  "questions": [
+    {
+      "id": 1,
+      "type": "short_answer",
+      "question": "What is the Internet, and what role do protocols play in it?",
+      "points": 5,
+      "answer": "The Internet is a global network of interconnected computer networks that enables communication and information sharing worldwide. It consists of billions of computing devices (hosts/end systems) connected through various types of links and packet switches (routers and link-layer switches). Protocols play a crucial role as they define the format, order of messages sent and received among network entities, and the actions taken on message transmission and receipt. They provide the rules and conventions that enable different devices and software to communicate effectively. Examples include HTTP for web browsing, SMTP for email, TCP/IP for reliable data transmission, etc."
+    },
+    {
+      "id": 2,
+      "type": "short_answer",
+      "question": "What is the network edge, and what are its components?",
+      "points": 5,
+      "answer": "The network edge consists of the end systems (hosts) that are connected to the Internet. These are the devices where applications run and where users interact with the network. Components include: End systems/hosts (computers, smartphones, servers, IoT devices), Access networks (residential access like DSL/cable/fiber, institutional access like Ethernet/WiFi, mobile access like 4G/5G), Physical media (guided media like fiber, coax, twisted pair; unguided media like wireless)"
+    },
+    {
+      "id": 3,
+      "type": "short_answer",
+      "question": "What is the difference between a client and a server in networking?",
+      "points": 5,
+      "answer": "CLIENT: A program or device that requests services from another program or device. It initiates communication by sending requests. SERVER: A program or device that provides services to clients. It waits for and responds to requests from clients. Key differences: Clients initiate communication; servers wait for requests. Servers typically run continuously; clients connect as needed. A single server can serve multiple clients simultaneously. The same device can act as both client and server for different services."
+    },
+    {
+      "id": 4,
+      "type": "short_answer",
+      "question": "What is the function of the network core in the Internet?",
+      "points": 5,
+      "answer": "The network core is the mesh of interconnected routers and switches that forward packets from source to destination. Its main functions include: Packet switching: Breaking data into packets and forwarding them independently, Routing: Determining the best path for packets to reach their destination, Forwarding: Moving packets from input links to appropriate output links, Managing network traffic and congestion, Providing redundancy and fault tolerance through multiple paths"
+    },
+    {
+      "id": 5,
+      "type": "short_answer",
+      "question": "What is packet switching, and why is it used?",
+      "points": 5,
+      "answer": "Packet switching is a method of data transmission where messages are broken into small units called packets, each containing destination address and sequence information. Each packet is forwarded independently through the network. Why it's used: Efficient resource sharing (no dedicated circuits needed), Better fault tolerance (alternative paths available), More flexible and scalable than circuit switching, Allows statistical multiplexing of resources, Cost-effective for bursty data traffic"
+    },
+    {
+      "id": 6,
+      "type": "short_answer",
+      "question": "How does packet switching differ from circuit switching?",
+      "points": 5,
+      "answer": "CIRCUIT SWITCHING: Establishes dedicated end-to-end connection before communication, Resources reserved for entire call duration, Guaranteed bandwidth and performance, Used in traditional telephone networks, More suitable for continuous, constant-rate traffic. PACKET SWITCHING: No dedicated path; packets forwarded independently, Resources shared among users (statistical multiplexing), Variable delay and throughput, More efficient for bursty traffic, Better resource utilization"
+    },
+    {
+      "id": 7,
+      "type": "short_answer",
+      "question": "What are the types of delays in a network?",
+      "points": 5,
+      "answer": "Four main types of delays: 1. PROCESSING DELAY: Time to examine packet header, check for errors, and determine output link, 2. QUEUEING DELAY: Time spent waiting in output queue before transmission, 3. TRANSMISSION DELAY: Time to push all packet bits onto the link (L/R), 4. PROPAGATION DELAY: Time for signal to travel from source to destination (d/s). Total nodal delay = Processing + Queueing + Transmission + Propagation"
+    },
+    {
+      "id": 8,
+      "type": "short_answer",
+      "question": "What is packet loss, and what causes it?",
+      "points": 5,
+      "answer": "Packet loss occurs when packets are dropped/discarded in the network and fail to reach their destination. Causes: Buffer overflow: Queues become full, arriving packets are dropped, Network congestion: Too much traffic exceeds link capacity, Hardware failures: Router/switch malfunctions, Transmission errors: Corrupted packets are discarded, Network configuration issues"
+    },
+    {
+      "id": 9,
+      "type": "short_answer",
+      "question": "What is throughput in networking?",
+      "points": 5,
+      "answer": "Throughput is the actual rate at which data is successfully transmitted between source and destination, measured in bits per second (bps). Types: INSTANTANEOUS THROUGHPUT: Rate at any given instant, AVERAGE THROUGHPUT: Average rate over longer time period, END-TO-END THROUGHPUT: Limited by bottleneck link (minimum capacity link in path). Throughput ≤ Bandwidth due to factors like congestion, protocol overhead, and network conditions."
+    },
+    {
+      "id": 10,
+      "type": "short_answer",
+      "question": "Why is layering used in network architecture?",
+      "points": 5,
+      "answer": "Layering provides several benefits: MODULARITY: Each layer focuses on specific functions, ABSTRACTION: Lower layers hide complexity from upper layers, INTEROPERABILITY: Standardized interfaces enable different implementations, MAINTAINABILITY: Changes in one layer don't affect others, REUSABILITY: Layers can be reused across different applications, DISTRIBUTED DEVELOPMENT: Different teams can work on different layers"
+    },
+    {
+      "id": 11,
+      "type": "multiple_choice",
+      "question": "Which of the following descriptions correspond to a \"services\" view of the Internet? Select one or more correct answers. [Hint: more than one answer is correct]",
+      "options": [
+        "A. A platform for building network applications.",
+        "B. A collection of hardware and software components executing protocols that define the format and the order of messages exchanged between two or more communicating entities, as well as the actions taken on the transmission and/or receipt of a message or other event.",
+        "C. A collection of billions of computing devices, and packet switches interconnected by links.",
+        "D. A place I go for information, entertainment, and to communicate with people.",
+        "E. A \"network of networks\"."
+      ],
+      "correctAnswers": ["A", "D"],
+      "points": 3,
+      "multipleSelect": true
+    },
+    {
+      "id": 12,
+      "type": "multiple_choice",
+      "question": "Which of the following human scenarios involve a protocol? (recall: \"Protocols define the format, order of messages sent and received among network entities, and actions taken on message transmission, receipt\") Select one or more correct answers. [Hint: more than one answer is correct]",
+      "options": [
+        "A. Two people introducing themselves to each other.",
+        "B. A person reading a book.",
+        "C. One person asking, and getting, the time to/from another person.",
+        "D. A person sleeping.",
+        "E. A student raising her/his hand to ask a really insightful question, followed by the teaching acknowledging the student, listening carefully to the question, and responding with a clear, insightful answer. And then thanking the student for the question, since teachers love to get questions."
+      ],
+      "correctAnswers": ["A", "C", "E"],
+      "points": 3,
+      "multipleSelect": true
+    },
+    {
+      "id": 13,
+      "type": "single_choice",
+      "question": "Which of the following physical layer technologies has the highest transmission rate and lowest bit error rate in practice?",
+      "options": [
+        "1. Fiber optic cable",
+        "2. 4G/5G cellular",
+        "3. Satellite channel",
+        "4. Twisted pair (e.g., CAT5, CAT6)",
+        "5. 802.11 WiFi Channel",
+        "6. Coaxial cable"
+      ],
+      "correctAnswer": "1",
+      "points": 2
+    },
+    {
+      "id": 14,
+      "type": "short_answer",
+      "question": "Write distinction between routing versus forwarding.",
+      "points": 5,
+      "answer": "ROUTING: Network-wide process that determines end-to-end paths, Creates and maintains routing tables/forwarding tables, Uses routing algorithms (e.g., OSPF, BGP), Operates on longer timescales, Control plane function. FORWARDING: Local action at each router, Moves packets from input link to appropriate output link, Uses forwarding table created by routing process, Operates on packet timescales (nanoseconds), Data plane function"
+    }
+  ]
+}
